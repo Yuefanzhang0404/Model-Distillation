@@ -1,0 +1,10 @@
+{
+  "epoch": 3,
+  "global_step": 4000,
+  "avg_total_loss": 15.654411754608155,
+  "avg_ce_loss": 0.0,
+  "avg_kd_loss": 15.654411754608155,
+  "avg_hidden_loss": 0.0,
+  "avg_tokens_per_sec": 99.81374105787614,
+  "mode": "kl_only"
+}

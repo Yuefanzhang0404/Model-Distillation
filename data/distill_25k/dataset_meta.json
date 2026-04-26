@@ -1,0 +1,32 @@
+{
+  "output_file": "data/distill_25k/mixed_25k.jsonl",
+  "num_total": 25000,
+  "seed": 42,
+  "datasets": {
+    "infinity": {
+      "dataset_name": "arcee-ai/BAAI-Infinity-Instruct-System",
+      "split": "train",
+      "source": "infinity_instruct",
+      "requested": 20000,
+      "valid_seen": 3463409,
+      "total_seen": 3463423,
+      "collected": 20000
+    },
+    "orca_math": {
+      "dataset_name": "microsoft/orca-math-word-problems-200k",
+      "split": "train",
+      "source": "orca_math",
+      "requested": 5000,
+      "valid_seen": 200035,
+      "total_seen": 200035,
+      "collected": 5000
+    }
+  },
+  "format": {
+    "each_row": {
+      "prompt": "str",
+      "response": "str",
+      "source": "str"
+    }
+  }
+}
