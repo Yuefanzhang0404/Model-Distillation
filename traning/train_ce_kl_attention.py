@@ -707,9 +707,7 @@ def load_models(config: DistillationConfig, logger: logging.Logger):
     teacher = load_teacher(config, amp_dtype)
     student = load_student(config, amp_dtype, device, logger)
 
-    # ========== 关键修改：彻底删除 resize_token_embeddings ==========
-    # 不再修改学生词表、embedding，完全靠 VocabProjector 做跨词表映射
-
+    
     vocab_projector = VocabProjector(
         student.config.hidden_size,
         teacher.config.vocab_size,
