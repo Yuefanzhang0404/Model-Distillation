@@ -1,0 +1,228 @@
+2026-04-23 00:56:15,621 - INFO - Starting training
+2026-04-23 00:56:15,621 - INFO - {
+  "teacher_model": "Qwen/Qwen2.5-3B-Instruct",
+  "student_model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+  "mode": "ce_kl",
+  "data_path": "data/distill_25k/mixed_25k.jsonl",
+  "data_size": 25000,
+  "max_seq_length": 512,
+  "per_device_train_batch_size": 1,
+  "gradient_accumulation_steps": 16,
+  "num_train_epochs": 3,
+  "learning_rate": 5e-05,
+  "temperature": 2.0,
+  "alpha": 0.5,
+  "beta": 0.5,
+  "gamma": 0,
+  "output_dir": "runs/qwen3b_smol360m_ce_kl_gpu0",
+  "save_steps": 500,
+  "logging_steps": 50,
+  "resume_from_checkpoint": null,
+  "device": "cuda:0",
+  "use_bf16": true,
+  "use_gradient_checkpointing": true,
+  "attn_implementation": "sdpa",
+  "load_teacher_in_4bit": true,
+  "num_workers": 2,
+  "pin_memory": true,
+  "grad_clip": 1.0
+}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/434 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/434 [00:00<01:01,  7.03it/s]/speed-scratch/z_yuefan/distill-env/lib/python3.11/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+
+Loading weights:   1%|          | 5/434 [00:00<00:19, 22.22it/s]
+Loading weights:   9%|▉         | 39/434 [00:00<00:02, 149.60it/s]
+Loading weights:  17%|█▋        | 75/434 [00:00<00:01, 219.73it/s]
+Loading weights:  24%|██▍       | 104/434 [00:00<00:01, 241.36it/s]
+Loading weights:  31%|███       | 135/434 [00:00<00:01, 261.56it/s]
+Loading weights:  39%|███▉      | 169/434 [00:00<00:00, 285.53it/s]
+Loading weights:  46%|████▌     | 199/434 [00:00<00:00, 288.34it/s]
+Loading weights:  54%|█████▎    | 233/434 [00:00<00:00, 301.20it/s]
+Loading weights:  62%|██████▏   | 268/434 [00:01<00:00, 315.29it/s]
+Loading weights:  70%|███████   | 304/434 [00:01<00:00, 325.07it/s]
+Loading weights:  78%|███████▊  | 340/434 [00:01<00:00, 328.38it/s]
+Loading weights:  87%|████████▋ | 376/434 [00:01<00:00, 334.77it/s]
+Loading weights:  95%|█████████▍| 412/434 [00:01<00:00, 340.79it/s]
+Loading weights: 100%|██████████| 434/434 [00:01<00:00, 281.51it/s]
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 290/290 [00:00<00:00, 5124.70it/s]
+2026-04-23 00:56:24,481 - INFO - Resizing student embeddings: 49152 -> 151936
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+2026-04-23 00:56:25,831 - INFO - Teacher hidden size: 2048
+2026-04-23 00:56:25,831 - INFO - Student hidden size: 960
+2026-04-23 00:56:25,831 - INFO - Teacher vocab size: 151936
+2026-04-23 00:56:25,831 - INFO - Student vocab size: 151936
+2026-04-23 00:56:25,832 - INFO - Trainable student params: 460,493,760
+2026-04-23 00:56:25,833 - INFO - Trainable vocab projector params: 146,010,496
+2026-04-23 01:02:07,257 - INFO - Step 50 | Loss: 21.2867 | CE: 10.5517 | KD: 32.0218 | Hidden: 0.0000 | Tok/s: 833.40
+2026-04-23 01:07:25,089 - INFO - Step 100 | Loss: 16.5853 | CE: 8.2040 | KD: 24.9666 | Hidden: 0.0000 | Tok/s: 944.74
+2026-04-23 01:12:44,823 - INFO - Step 150 | Loss: 14.4994 | CE: 7.6081 | KD: 21.3906 | Hidden: 0.0000 | Tok/s: 884.36
+2026-04-23 01:18:24,779 - INFO - Step 200 | Loss: 13.5265 | CE: 7.6534 | KD: 19.3996 | Hidden: 0.0000 | Tok/s: 728.86
+2026-04-23 01:23:51,860 - INFO - Step 250 | Loss: 13.5725 | CE: 7.3376 | KD: 19.8073 | Hidden: 0.0000 | Tok/s: 902.21
+2026-04-23 01:29:18,252 - INFO - Step 300 | Loss: 13.1135 | CE: 7.6588 | KD: 18.5682 | Hidden: 0.0000 | Tok/s: 822.19
+2026-04-23 01:34:43,851 - INFO - Step 350 | Loss: 13.3085 | CE: 7.3880 | KD: 19.2290 | Hidden: 0.0000 | Tok/s: 844.58
+2026-04-23 01:40:01,792 - INFO - Step 400 | Loss: 13.3131 | CE: 7.8805 | KD: 18.7457 | Hidden: 0.0000 | Tok/s: 602.79
+2026-04-23 01:45:56,764 - INFO - Step 450 | Loss: 12.9351 | CE: 7.2221 | KD: 18.6480 | Hidden: 0.0000 | Tok/s: 700.23
+2026-04-23 01:52:10,711 - INFO - Step 500 | Loss: 13.3033 | CE: 7.2038 | KD: 19.4027 | Hidden: 0.0000 | Tok/s: 637.37
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.51s/it]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.51s/it]
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.08s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.08s/it]
+2026-04-23 01:58:32,032 - INFO - Step 550 | Loss: 12.9103 | CE: 6.9561 | KD: 18.8644 | Hidden: 0.0000 | Tok/s: 631.66
+2026-04-23 02:04:40,159 - INFO - Step 600 | Loss: 12.8278 | CE: 7.1933 | KD: 18.4622 | Hidden: 0.0000 | Tok/s: 772.56
+2026-04-23 02:10:48,314 - INFO - Step 650 | Loss: 12.7650 | CE: 7.1461 | KD: 18.3838 | Hidden: 0.0000 | Tok/s: 821.79
+2026-04-23 02:16:55,727 - INFO - Step 700 | Loss: 12.0223 | CE: 6.9454 | KD: 17.0992 | Hidden: 0.0000 | Tok/s: 860.29
+2026-04-23 02:23:07,195 - INFO - Step 750 | Loss: 12.5108 | CE: 6.8404 | KD: 18.1812 | Hidden: 0.0000 | Tok/s: 764.78
+2026-04-23 02:29:23,193 - INFO - Step 800 | Loss: 12.3637 | CE: 6.9228 | KD: 17.8046 | Hidden: 0.0000 | Tok/s: 932.74
+2026-04-23 02:35:37,211 - INFO - Step 850 | Loss: 12.1725 | CE: 7.0913 | KD: 17.2537 | Hidden: 0.0000 | Tok/s: 725.36
+2026-04-23 02:41:52,187 - INFO - Step 900 | Loss: 12.4386 | CE: 7.4166 | KD: 17.4605 | Hidden: 0.0000 | Tok/s: 639.99
+2026-04-23 02:48:06,007 - INFO - Step 950 | Loss: 11.6092 | CE: 6.9558 | KD: 16.2626 | Hidden: 0.0000 | Tok/s: 695.63
+2026-04-23 02:54:19,119 - INFO - Step 1000 | Loss: 12.2773 | CE: 6.9755 | KD: 17.5791 | Hidden: 0.0000 | Tok/s: 635.92
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.36s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.36s/it]
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.65s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.65s/it]
+2026-04-23 03:00:48,437 - INFO - Step 1050 | Loss: 11.8388 | CE: 6.7291 | KD: 16.9485 | Hidden: 0.0000 | Tok/s: 792.17
+2026-04-23 03:07:07,913 - INFO - Step 1100 | Loss: 12.2904 | CE: 6.9025 | KD: 17.6783 | Hidden: 0.0000 | Tok/s: 704.99
+2026-04-23 03:13:22,667 - INFO - Step 1150 | Loss: 11.8260 | CE: 6.7003 | KD: 16.9516 | Hidden: 0.0000 | Tok/s: 637.93
+2026-04-23 03:19:32,665 - INFO - Step 1200 | Loss: 11.5865 | CE: 6.8857 | KD: 16.2873 | Hidden: 0.0000 | Tok/s: 683.76
+2026-04-23 03:25:43,286 - INFO - Step 1250 | Loss: 11.5630 | CE: 6.7023 | KD: 16.4236 | Hidden: 0.0000 | Tok/s: 685.14
+2026-04-23 03:31:59,353 - INFO - Step 1300 | Loss: 12.0518 | CE: 6.7048 | KD: 17.3988 | Hidden: 0.0000 | Tok/s: 575.25
+2026-04-23 03:38:12,520 - INFO - Step 1350 | Loss: 11.3526 | CE: 6.8949 | KD: 15.8103 | Hidden: 0.0000 | Tok/s: 1019.62
+2026-04-23 03:44:27,097 - INFO - Step 1400 | Loss: 11.6465 | CE: 6.6140 | KD: 16.6790 | Hidden: 0.0000 | Tok/s: 697.04
+2026-04-23 03:50:38,831 - INFO - Step 1450 | Loss: 12.3164 | CE: 6.7358 | KD: 17.8970 | Hidden: 0.0000 | Tok/s: 595.01
+2026-04-23 03:56:50,935 - INFO - Step 1500 | Loss: 12.1760 | CE: 6.7367 | KD: 17.6153 | Hidden: 0.0000 | Tok/s: 741.49
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.66s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.66s/it]
+2026-04-23 03:56:57,606 - INFO - Deleted old checkpoint: runs/qwen3b_smol360m_ce_kl_gpu0/checkpoint-500
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.66s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.66s/it]
+2026-04-23 04:03:18,440 - INFO - Step 1550 | Loss: 11.7326 | CE: 6.6810 | KD: 16.7843 | Hidden: 0.0000 | Tok/s: 889.67
+2026-04-23 04:04:55,784 - INFO - Epoch 1 finished | Total: 13.0455 | CE: 7.3075 | KD: 18.7835 | Hidden: 0.0000 | Tok/s: 768.09
+2026-04-23 04:09:14,314 - INFO - Step 1600 | Loss: 12.1958 | CE: 6.9726 | KD: 17.4189 | Hidden: 0.0000 | Tok/s: 665.44
+2026-04-23 04:15:23,417 - INFO - Step 1650 | Loss: 12.4492 | CE: 7.0966 | KD: 17.8018 | Hidden: 0.0000 | Tok/s: 690.15
+2026-04-23 04:21:34,034 - INFO - Step 1700 | Loss: 11.8116 | CE: 6.8930 | KD: 16.7302 | Hidden: 0.0000 | Tok/s: 667.80
+2026-04-23 04:27:47,558 - INFO - Step 1750 | Loss: 11.6778 | CE: 6.5003 | KD: 16.8554 | Hidden: 0.0000 | Tok/s: 617.69
+2026-04-23 04:33:52,896 - INFO - Step 1800 | Loss: 11.3702 | CE: 6.6892 | KD: 16.0511 | Hidden: 0.0000 | Tok/s: 688.61
+2026-04-23 04:39:58,948 - INFO - Step 1850 | Loss: 12.0090 | CE: 6.5488 | KD: 17.4693 | Hidden: 0.0000 | Tok/s: 857.25
+2026-04-23 04:46:08,282 - INFO - Step 1900 | Loss: 11.8495 | CE: 6.4711 | KD: 17.2280 | Hidden: 0.0000 | Tok/s: 753.53
+2026-04-23 04:52:23,699 - INFO - Step 1950 | Loss: 12.1122 | CE: 6.3638 | KD: 17.8606 | Hidden: 0.0000 | Tok/s: 931.68
+2026-04-23 04:58:42,261 - INFO - Step 2000 | Loss: 11.7726 | CE: 6.6005 | KD: 16.9446 | Hidden: 0.0000 | Tok/s: 615.82
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.73s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.73s/it]
+2026-04-23 04:58:48,303 - INFO - Deleted old checkpoint: runs/qwen3b_smol360m_ce_kl_gpu0/checkpoint-1000
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.73s/it]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.73s/it]
+2026-04-23 05:05:12,743 - INFO - Step 2050 | Loss: 11.5555 | CE: 6.6414 | KD: 16.4695 | Hidden: 0.0000 | Tok/s: 699.89
+2026-04-23 05:11:41,606 - INFO - Step 2100 | Loss: 11.4488 | CE: 6.5486 | KD: 16.3490 | Hidden: 0.0000 | Tok/s: 767.14
+2026-04-23 05:18:31,080 - INFO - Step 2150 | Loss: 11.6796 | CE: 6.9635 | KD: 16.3957 | Hidden: 0.0000 | Tok/s: 655.79
+2026-04-23 05:24:53,928 - INFO - Step 2200 | Loss: 11.8044 | CE: 6.6553 | KD: 16.9535 | Hidden: 0.0000 | Tok/s: 729.12
+2026-04-23 05:31:13,856 - INFO - Step 2250 | Loss: 12.0133 | CE: 6.8780 | KD: 17.1487 | Hidden: 0.0000 | Tok/s: 709.11
+2026-04-23 05:37:35,327 - INFO - Step 2300 | Loss: 11.7574 | CE: 6.6933 | KD: 16.8216 | Hidden: 0.0000 | Tok/s: 719.50
+2026-04-23 05:43:54,288 - INFO - Step 2350 | Loss: 12.0971 | CE: 6.6943 | KD: 17.4998 | Hidden: 0.0000 | Tok/s: 908.41
+2026-04-23 05:50:15,918 - INFO - Step 2400 | Loss: 11.9200 | CE: 6.7157 | KD: 17.1244 | Hidden: 0.0000 | Tok/s: 872.87
+2026-04-23 05:56:41,218 - INFO - Step 2450 | Loss: 11.7985 | CE: 6.8078 | KD: 16.7893 | Hidden: 0.0000 | Tok/s: 754.42
+2026-04-23 06:03:10,249 - INFO - Step 2500 | Loss: 11.9029 | CE: 6.3605 | KD: 17.4453 | Hidden: 0.0000 | Tok/s: 609.21
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.26s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.27s/it]
+2026-04-23 06:03:15,848 - INFO - Deleted old checkpoint: runs/qwen3b_smol360m_ce_kl_gpu0/checkpoint-1500
+2026-04-23 06:09:49,561 - INFO - Step 2550 | Loss: 11.6365 | CE: 6.7947 | KD: 16.4784 | Hidden: 0.0000 | Tok/s: 731.10
+2026-04-23 06:16:12,883 - INFO - Step 2600 | Loss: 11.8534 | CE: 6.8249 | KD: 16.8819 | Hidden: 0.0000 | Tok/s: 687.16
+2026-04-23 06:22:30,012 - INFO - Step 2650 | Loss: 11.5612 | CE: 6.3787 | KD: 16.7437 | Hidden: 0.0000 | Tok/s: 944.83
+2026-04-23 06:28:53,815 - INFO - Step 2700 | Loss: 11.9200 | CE: 6.8836 | KD: 16.9565 | Hidden: 0.0000 | Tok/s: 694.82
+2026-04-23 06:35:16,933 - INFO - Step 2750 | Loss: 11.7319 | CE: 6.6191 | KD: 16.8447 | Hidden: 0.0000 | Tok/s: 675.82
+2026-04-23 06:41:14,491 - INFO - Step 2800 | Loss: 11.6871 | CE: 6.9028 | KD: 16.4714 | Hidden: 0.0000 | Tok/s: 613.79
+2026-04-23 06:47:37,176 - INFO - Step 2850 | Loss: 12.1753 | CE: 6.9420 | KD: 17.4087 | Hidden: 0.0000 | Tok/s: 804.67
+2026-04-23 06:54:01,394 - INFO - Step 2900 | Loss: 11.5590 | CE: 6.5643 | KD: 16.5538 | Hidden: 0.0000 | Tok/s: 926.41
+2026-04-23 07:00:29,319 - INFO - Step 2950 | Loss: 12.2217 | CE: 6.8823 | KD: 17.5612 | Hidden: 0.0000 | Tok/s: 732.86
+2026-04-23 07:06:59,486 - INFO - Step 3000 | Loss: 11.7507 | CE: 6.5559 | KD: 16.9455 | Hidden: 0.0000 | Tok/s: 669.86
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.69s/it]
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.69s/it]
+2026-04-23 07:07:05,399 - INFO - Deleted old checkpoint: runs/qwen3b_smol360m_ce_kl_gpu0/checkpoint-2000
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.07s/it]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.07s/it]
+2026-04-23 07:13:37,397 - INFO - Step 3050 | Loss: 11.6178 | CE: 6.4855 | KD: 16.7500 | Hidden: 0.0000 | Tok/s: 724.77
+2026-04-23 07:19:56,715 - INFO - Step 3100 | Loss: 11.7831 | CE: 6.6056 | KD: 16.9607 | Hidden: 0.0000 | Tok/s: 592.11
+2026-04-23 07:23:00,993 - INFO - Epoch 2 finished | Total: 11.8011 | CE: 6.6982 | KD: 16.9040 | Hidden: 0.0000 | Tok/s: 732.94
+2026-04-23 07:26:16,238 - INFO - Step 3150 | Loss: 11.8707 | CE: 6.7385 | KD: 17.0030 | Hidden: 0.0000 | Tok/s: 823.45
+2026-04-23 07:32:35,449 - INFO - Step 3200 | Loss: 11.9527 | CE: 6.6687 | KD: 17.2367 | Hidden: 0.0000 | Tok/s: 640.90
+2026-04-23 07:38:53,457 - INFO - Step 3250 | Loss: 11.8521 | CE: 6.5879 | KD: 17.1163 | Hidden: 0.0000 | Tok/s: 690.51
+2026-04-23 07:45:13,405 - INFO - Step 3300 | Loss: 11.9661 | CE: 6.6392 | KD: 17.2931 | Hidden: 0.0000 | Tok/s: 811.84
+2026-04-23 07:51:32,922 - INFO - Step 3350 | Loss: 11.7611 | CE: 6.8160 | KD: 16.7062 | Hidden: 0.0000 | Tok/s: 735.72
+2026-04-23 07:57:49,196 - INFO - Step 3400 | Loss: 12.1125 | CE: 6.8193 | KD: 17.4056 | Hidden: 0.0000 | Tok/s: 735.92
+2026-04-23 08:04:09,301 - INFO - Step 3450 | Loss: 12.1963 | CE: 6.6460 | KD: 17.7467 | Hidden: 0.0000 | Tok/s: 673.99
+2026-04-23 08:10:33,229 - INFO - Step 3500 | Loss: 11.6898 | CE: 6.5390 | KD: 16.8405 | Hidden: 0.0000 | Tok/s: 647.96
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.07s/it]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.07s/it]
+2026-04-23 08:10:40,315 - INFO - Deleted old checkpoint: runs/qwen3b_smol360m_ce_kl_gpu0/checkpoint-2500
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:03<00:00,  3.05s/it]
+Writing model shards: 100%|██████████| 1/1 [00:03<00:00,  3.05s/it]
+2026-04-23 08:17:07,950 - INFO - Step 3550 | Loss: 11.7653 | CE: 6.6292 | KD: 16.9013 | Hidden: 0.0000 | Tok/s: 640.48
+2026-04-23 08:23:26,237 - INFO - Step 3600 | Loss: 12.1531 | CE: 6.8981 | KD: 17.4082 | Hidden: 0.0000 | Tok/s: 660.36
+2026-04-23 08:29:42,924 - INFO - Step 3650 | Loss: 12.0249 | CE: 6.6956 | KD: 17.3543 | Hidden: 0.0000 | Tok/s: 655.89
+2026-04-23 08:35:56,373 - INFO - Step 3700 | Loss: 11.7086 | CE: 6.8943 | KD: 16.5230 | Hidden: 0.0000 | Tok/s: 919.68
+2026-04-23 08:42:17,083 - INFO - Step 3750 | Loss: 11.6310 | CE: 6.4172 | KD: 16.8448 | Hidden: 0.0000 | Tok/s: 726.82
+2026-04-23 08:49:10,378 - INFO - Step 3800 | Loss: 12.2974 | CE: 6.9053 | KD: 17.6896 | Hidden: 0.0000 | Tok/s: 796.27
+2026-04-23 08:55:51,362 - INFO - Step 3850 | Loss: 11.8231 | CE: 6.6155 | KD: 17.0307 | Hidden: 0.0000 | Tok/s: 705.77
+2026-04-23 09:02:17,805 - INFO - Step 3900 | Loss: 11.5929 | CE: 6.7892 | KD: 16.3967 | Hidden: 0.0000 | Tok/s: 629.24
+2026-04-23 09:08:38,040 - INFO - Step 3950 | Loss: 12.1423 | CE: 6.4839 | KD: 17.8007 | Hidden: 0.0000 | Tok/s: 656.03
+2026-04-23 09:14:33,526 - INFO - Step 4000 | Loss: 12.3102 | CE: 6.8825 | KD: 17.7378 | Hidden: 0.0000 | Tok/s: 850.80
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:09<00:00,  9.27s/it]
+Writing model shards: 100%|██████████| 1/1 [00:09<00:00,  9.27s/it]
+2026-04-23 09:14:51,823 - INFO - Deleted old checkpoint: runs/qwen3b_smol360m_ce_kl_gpu0/checkpoint-3000
+2026-04-23 09:21:16,096 - INFO - Step 4050 | Loss: 12.0220 | CE: 6.9281 | KD: 17.1159 | Hidden: 0.0000 | Tok/s: 670.67
+2026-04-23 09:27:50,378 - INFO - Step 4100 | Loss: 11.1456 | CE: 6.7772 | KD: 15.5141 | Hidden: 0.0000 | Tok/s: 576.02
+2026-04-23 09:34:08,735 - INFO - Step 4150 | Loss: 11.7007 | CE: 6.5867 | KD: 16.8146 | Hidden: 0.0000 | Tok/s: 775.52
+2026-04-23 09:40:27,267 - INFO - Step 4200 | Loss: 11.8477 | CE: 6.5720 | KD: 17.1234 | Hidden: 0.0000 | Tok/s: 881.82
+2026-04-23 09:46:47,047 - INFO - Step 4250 | Loss: 11.1074 | CE: 6.9182 | KD: 15.2965 | Hidden: 0.0000 | Tok/s: 616.76
+2026-04-23 09:53:11,693 - INFO - Step 4300 | Loss: 11.6421 | CE: 6.6838 | KD: 16.6004 | Hidden: 0.0000 | Tok/s: 639.24
+2026-04-23 09:59:34,952 - INFO - Step 4350 | Loss: 11.4608 | CE: 6.6798 | KD: 16.2419 | Hidden: 0.0000 | Tok/s: 750.14
+2026-04-23 10:06:01,276 - INFO - Step 4400 | Loss: 12.3045 | CE: 6.9132 | KD: 17.6959 | Hidden: 0.0000 | Tok/s: 643.13
+2026-04-23 10:12:24,402 - INFO - Step 4450 | Loss: 12.1577 | CE: 6.7526 | KD: 17.5628 | Hidden: 0.0000 | Tok/s: 727.99
+2026-04-23 10:18:48,391 - INFO - Step 4500 | Loss: 11.7102 | CE: 6.4956 | KD: 16.9247 | Hidden: 0.0000 | Tok/s: 792.57
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.69s/it]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.69s/it]
+2026-04-23 10:18:53,141 - INFO - Deleted old checkpoint: runs/qwen3b_smol360m_ce_kl_gpu0/checkpoint-3500
+2026-04-23 10:25:17,020 - INFO - Step 4550 | Loss: 11.4696 | CE: 6.4853 | KD: 16.4539 | Hidden: 0.0000 | Tok/s: 613.33
+2026-04-23 10:31:33,662 - INFO - Step 4600 | Loss: 11.4411 | CE: 6.1361 | KD: 16.7461 | Hidden: 0.0000 | Tok/s: 692.81
+2026-04-23 10:37:54,075 - INFO - Step 4650 | Loss: 12.3740 | CE: 6.9359 | KD: 17.8121 | Hidden: 0.0000 | Tok/s: 877.28
+2026-04-23 10:42:36,834 - INFO - Epoch 3 finished | Total: 11.7658 | CE: 6.6644 | KD: 16.8672 | Hidden: 0.0000 | Tok/s: 726.70
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.27s/it]
+Writing model shards: 100%|██████████| 1/1 [00:02<00:00,  2.27s/it]
