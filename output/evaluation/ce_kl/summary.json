@@ -1,0 +1,11 @@
+{
+  "experiment": "ce_kl",
+  "category_accuracy": {
+    "stem": 21.72534094513162,
+    "Humanities": 24.973432518597235,
+    "other": 24.847119407788863,
+    "social": 22.00194995125122
+  },
+  "average_accuracy": 23.565019228030195,
+  "num_examples": 14042
+}
