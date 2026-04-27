@@ -19,9 +19,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 
 @dataclass
-class DistillationConfig:
-    teacher_model: str = "Qwen/Qwen2.5-3B-Instruct"
-    student_model: str = "HuggingFaceTB/SmolLM2-360M-Instruct"
+class DistillationConfig: #configuration for distillation training
+    teacher_model: str = "Qwen/Qwen2.5-3B-Instruct" #teacher model
+    student_model: str = "HuggingFaceTB/SmolLM2-360M-Instruct" #student model
     mode: str = "kl_only"
 
     data_path: Optional[str] = "data/distill_25k/mixed_25k.jsonl"
@@ -53,7 +53,7 @@ class DistillationConfig:
     pin_memory: bool = True
     grad_clip: float = 1.0
 
-
+# Define VocabProjector a simple linear layer 
 class VocabProjector(nn.Module):
     def __init__(self, student_hidden_size: int, teacher_vocab_size: int):
         super().__init__()
@@ -66,7 +66,7 @@ class VocabProjector(nn.Module):
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         return self.projector(hidden_states)
 
-
+#Extract the final answer from the teacher's response
 class DistillationDataset(Dataset):
     def __init__(
         self,
@@ -85,6 +85,7 @@ class DistillationDataset(Dataset):
         if not self.texts:
             raise ValueError(f"No valid training samples found in {data_path}")
 
+    #process data 
     def _load_texts(self, path: Path, limit: int) -> List[str]:
         files = list(path.glob("*.jsonl")) if path.is_dir() else [path]
         texts: List[str] = []
@@ -101,7 +102,8 @@ class DistillationDataset(Dataset):
                         return texts
 
         return texts
-
+    
+    #handle json 
     @staticmethod
     def _parse_line(line: str) -> Optional[str]:
         try:
@@ -134,7 +136,7 @@ class DistillationDataset(Dataset):
             "attention_mask": encoded["attention_mask"].squeeze(0),
         }
 
-
+#create batch
 def collate_fn(batch: List[Dict[str, torch.Tensor]]) -> Dict[str, torch.Tensor]:
     input_ids = torch.stack([item["input_ids"] for item in batch])
     attention_mask = torch.stack([item["attention_mask"] for item in batch])
@@ -145,7 +147,7 @@ def collate_fn(batch: List[Dict[str, torch.Tensor]]) -> Dict[str, torch.Tensor]:
         "labels": input_ids.clone(),
     }
 
-
+#Load the teacher and student models
 def setup_logger(output_dir: str) -> logging.Logger:
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
@@ -200,7 +202,7 @@ def append_jsonl(path: Path, record: Dict[str, Any]) -> None:
     with path.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-
+#record loss values and training speed
 def average_records(
     records: List[Dict[str, float]],
     epoch: int,
@@ -329,6 +331,7 @@ class DistillationTrainer:
 
         return (temperature ** 2) * token_kd_loss[valid_tokens].mean()
 
+    #Compute the loss for a batch of data
     def forward_teacher(
         self,
         input_ids: torch.Tensor,
@@ -349,7 +352,8 @@ class DistillationTrainer:
                     output_attentions=output_attentions,
                     use_cache=False,
                 )
-
+    
+    #calculate the loss for the student model
     def forward_student(
         self,
         input_ids: torch.Tensor,

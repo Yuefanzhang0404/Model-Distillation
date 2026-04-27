@@ -330,6 +330,7 @@ class DistillationTrainer:
 
         return -100
 
+    #compute the hard label loss
     def compute_ce_loss(
         self,
         student_logits: torch.Tensor,
@@ -343,7 +344,8 @@ class DistillationTrainer:
             labels.view(-1),
             ignore_index=self.ignore_index,
         )
-
+    
+    #compute the soft label loss
     def compute_kd_loss(
         self,
         student_logits: torch.Tensor,
@@ -400,7 +402,8 @@ class DistillationTrainer:
         denominator = (mask.float().sum() * squared_error.size(-1)).clamp_min(1.0)
 
         return numerator / denominator
-
+    
+    #compute the combined loss(soft label and hard label) for the student model
     def combine_losses(
         self,
         ce_loss: torch.Tensor,
@@ -714,7 +717,7 @@ def load_tokenizer(config: DistillationConfig):
 
     return tokenizer
 
-
+#Load the teacher model
 def load_teacher(config: DistillationConfig, amp_dtype: torch.dtype):
     device_index = get_device_index(config.device)
 
@@ -745,7 +748,7 @@ def load_teacher(config: DistillationConfig, amp_dtype: torch.dtype):
     freeze_model(teacher)
     return teacher
 
-
+#Load the student model
 def load_student(
     config: DistillationConfig,
     amp_dtype: torch.dtype,

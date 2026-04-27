@@ -1,10 +1,10 @@
 {
   "epoch": 3,
-  "global_step": 3500,
-  "avg_total_loss": 11.689766235351563,
-  "avg_ce_loss": 6.538983898162842,
-  "avg_kd_loss": 16.840548591613768,
-  "avg_hidden_loss": 0.0,
-  "avg_tokens_per_sec": 647.9630345496003,
-  "mode": "ce_kl"
+  "global_step": 4000,
+  "avg_total_loss": 11.101191864013671,
+  "avg_ce_loss": 6.743276033401489,
+  "avg_kd_loss": 16.843393278121948,
+  "avg_hidden_loss": 9.921964120864867,
+  "avg_tokens_per_sec": 1123.3131815836236,
+  "mode": "ce_kl_hidden"
 }

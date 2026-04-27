@@ -66,7 +66,7 @@ class VocabProjector(nn.Module):
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         return self.projector(hidden_states)
 
-
+#build HiddenProjector for the hidden state distillation
 class HiddenProjector(nn.Module):
     def __init__(self, student_hidden_size: int, teacher_hidden_size: int):
         super().__init__()
@@ -343,6 +343,7 @@ class DistillationTrainer:
 
         return (temperature ** 2) * token_kd_loss[valid_tokens].mean()
 
+    #This was used in this process to compute the loss between the student and teacher hidden states
     def compute_hidden_loss(
         self,
         student_hidden: torch.Tensor,
@@ -384,6 +385,7 @@ class DistillationTrainer:
                     use_cache=False,
                 )
 
+    #Forward pass for the student model
     def forward_student(
         self,
         input_ids: torch.Tensor,

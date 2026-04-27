@@ -328,7 +328,7 @@ class DistillationTrainer:
 
         return (temperature ** 2) * token_kd_loss[valid_tokens].mean()
 
-
+    #The main different def in this process. Define the loss function for the attention distillation
     def compute_attention_relation_loss(
         self,
         student_attention: torch.Tensor,
